@@ -43,10 +43,18 @@ def main():
     # Create MoveIt 2 interface
     moveit2 = MoveIt2(
         node=node,
-        joint_names=panda.joint_names(),
-        base_link_name=panda.base_link_name(),
-        end_effector_name=panda.end_effector_name(),
-        group_name=panda.MOVE_GROUP_ARM,
+        joint_names=['axis_to_slider', 'shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'],
+        #With respect to general FoR
+        base_link_name="camera_link_optical",  # Your robot's base link
+        end_effector_name="tool0",  # Your robot's end-effector link
+        #For chaser on arm
+        # base_link_name="camera_link_optical",  # Your robot's base link
+        # end_effector_name="docking_point_link",  # Your robot's end-effector link
+        #For camera on arm
+        # base_link_name="tripod",  # Your robot's base link. CHANGE THIS ONE
+        # end_effector_name="camera_link_optical",  # Your robot's end-effector link
+        #Common to both scenarios
+        group_name="chaser",  # Your robot's move group name
         callback_group=callback_group,
     )
     moveit2.planner_id = (
